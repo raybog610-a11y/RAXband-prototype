@@ -1,0 +1,12 @@
+{
+  "network": "XBAND-RA",
+  "players": [
+    {
+      "id": "PLAYER001",
+      "name": "XBAND_USER",
+      "status": "online",
+      "game": "RetroArch",
+      "country": "ZA"
+    }
+  ]
+}
