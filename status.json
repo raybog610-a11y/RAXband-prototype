@@ -1,0 +1,11 @@
+{
+  "network": "XBAND-RA",
+  "status": "ONLINE",
+  "server_version": "0.1.0",
+  "players_online": 1247,
+  "active_matches": 38,
+  "active_tournaments": 2,
+  "message": "XBAND-RA NETWORK OPERATIONAL",
+  "maintenance": false,
+  "last_update": "2026-10-01 09:30"
+}
