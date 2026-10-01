@@ -1,0 +1,167 @@
+@font-face {
+  font-family: Pixel;
+  src: local("Courier New");
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #05070b;
+  color: #d8e2ff;
+  font-family: Pixel, "Courier New", monospace;
+  letter-spacing: 1px;
+}
+
+.scanlines {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.025) 0px,
+    rgba(255,255,255,0.025) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+  z-index: 10;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding: 25px 5%;
+  border-bottom: 2px solid #294cff;
+  background: #080b13;
+}
+
+.xband-logo {
+  font-size: 42px;
+  font-weight: bold;
+  font-style: italic;
+  color: #ffffff;
+  text-shadow: 3px 3px #2147ff;
+}
+
+.xband-logo span {
+  color: #9bb0ff;
+}
+
+.network-status {
+  flex: 1;
+  color: #9ba8cc;
+}
+
+.led {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 8px;
+  background: #20ff65;
+  box-shadow: 0 0 10px #20ff65;
+}
+
+.retroarch {
+  color: #6f8cff;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  padding: 0 5%;
+  background: #101522;
+  border-bottom: 1px solid #39466b;
+}
+
+nav a {
+  padding: 15px 20px;
+  color: #d8e2ff;
+  text-decoration: none;
+  border-right: 1px solid #303b5c;
+}
+
+nav a:hover {
+  background: #18306f;
+  color: #ffffff;
+}
+
+main {
+  width: min(1000px, 90%);
+  margin: 40px auto;
+}
+
+.panel {
+  margin-bottom: 25px;
+  padding: 25px;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      #0b1020 0px,
+      #0b1020 3px,
+      #0e1427 3px,
+      #0e1427 6px
+    );
+  border: 3px solid #8e9bbb;
+  box-shadow:
+    inset 0 0 0 3px #111827,
+    0 0 0 2px #26365e;
+}
+
+.panel-title {
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  color: #ffffff;
+  font-size: 22px;
+  border-bottom: 2px solid #3157ff;
+}
+
+.small {
+  color: #8996b7;
+  line-height: 1.7;
+}
+
+.news-date {
+  color: #587cff;
+  font-size: 13px;
+}
+
+article {
+  padding: 15px 0;
+  border-bottom: 1px solid #303b5c;
+}
+
+article:last-child {
+  border-bottom: 0;
+}
+
+article h2 {
+  margin: 7px 0;
+  color: #ffffff;
+  font-size: 19px;
+}
+
+article p {
+  color: #aeb9d4;
+  line-height: 1.6;
+}
+
+.big-number {
+  font-size: 54px;
+  color: #4f78ff;
+  text-shadow: 0 0 12px #2448ff;
+}
+
+.status-online {
+  color: #20ff65;
+}
+
+footer {
+  padding: 25px;
+  text-align: center;
+  color: #5d6885;
+  border-top: 1px solid #26304b;
+}

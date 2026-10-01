@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XBAND Network</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="scanlines"></div>
+
+  <header>
+    <div class="xband-logo">X<span>BAND</span></div>
+    <div class="network-status">
+      <span class="led"></span>
+      ONLINE GAMING NETWORK
+    </div>
+    <div class="retroarch">RETROARCH</div>
+  </header>
+
+  <nav>
+    <a href="#home">HOME</a>
+    <a href="#news">NEWS</a>
+    <a href="#players">PLAYERS</a>
+    <a href="#tournaments">TOURNAMENTS</a>
+    <a href="#status">NETWORK STATUS</a>
+  </nav>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="panel">
+        <div class="panel-title">WELCOME TO XBAND</div>
+        <p>RETROARCH ONLINE GAMING NETWORK</p>
+        <p class="small">THIS SERVER PROVIDES NEWS AND NETWORK INFORMATION TO XBAND-ENABLED RETROARCH CLIENTS.</p>
+      </div>
+    </section>
+
+    <section id="news">
+      <div class="panel">
+        <div class="panel-title">LATEST NETWORK NEWS</div>
+        <div id="news-list">LOADING...</div>
+      </div>
+    </section>
+
+    <section id="players">
+      <div class="panel">
+        <div class="panel-title">PLAYERS ONLINE</div>
+        <div class="big-number">1,247</div>
+        <p>PLAYERS CURRENTLY CONNECTED</p>
+      </div>
+    </section>
+
+    <section id="tournaments">
+      <div class="panel">
+        <div class="panel-title">UPCOMING TOURNAMENT</div>
+        <p><strong>STREET FIGHTER II TURBO</strong></p>
+        <p>32 PLAYER OPEN TOURNAMENT</p>
+        <p>REGISTRATION: OPEN</p>
+      </div>
+    </section>
+
+    <section id="status">
+      <div class="panel">
+        <div class="panel-title">NETWORK STATUS</div>
+        <p><span class="status-online">● ONLINE</span></p>
+        <p>NEWS SERVER: ONLINE</p>
+        <p>API STATUS: ONLINE</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    XBAND-RA NETWORK // RETROARCH ONLINE SERVICE
+  </footer>
+
+  <script>
+    fetch("news.json?cache=" + Date.now())
+      .then(response => response.json())
+      .then(data => {
+        const list = document.getElementById("news-list");
+        list.innerHTML = "";
+
+        data.news.forEach(item => {
+          const article = document.createElement("article");
+          article.innerHTML = `
+            <div class="news-date">${item.date}</div>
+            <h2>${item.title}</h2>
+            <p>${item.message}</p>
+          `;
+          list.appendChild(article);
+        });
+      })
+      .catch(() => {
+        document.getElementById("news-list").textContent = "NETWORK ERROR";
+      });
+  </script>
+</body>
+</html>

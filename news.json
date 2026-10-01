@@ -1,0 +1,18 @@
+{
+  "network": "XBAND-RA",
+  "version": 1,
+  "news": [
+    {
+      "id": 1,
+      "date": "2026-10-01",
+      "title": "WELCOME TO XBAND",
+      "message": "The XBAND-RA network is online. This message is being served from the network news server."
+    },
+    {
+      "id": 2,
+      "date": "2026-10-01",
+      "title": "RETROARCH SERVICE TEST",
+      "message": "The first network test is ready. Change this file and the website will display the new message."
+    }
+  ]
+}
