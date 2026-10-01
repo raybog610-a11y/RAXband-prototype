@@ -1,644 +1,503 @@
-<!DOCTYPE html>
+<!DOCTYPE html><!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+<title>XBAND-RA NETWORK</title>
 
-  <meta
-    name="description"
-    content="XBAND-RA RetroArch Online Gaming Network"
-  >
+<style>
+    * {
+        box-sizing: border-box;
+    }
 
-  <title>XBAND-RA Network</title>
+    body {
+        margin: 0;
+        background: #000;
+        color: #c6c6c6;
+        font-family: Arial, Helvetica, sans-serif;
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
 
-  <link rel="stylesheet" href="style.css">
+    .screen {
+        width: 100%;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 30px;
+    }
+
+    .header {
+        border: 2px solid #777;
+        padding: 18px 22px;
+        margin-bottom: 20px;
+        background: #050505;
+    }
+
+    .logo {
+        font-size: 32px;
+        font-weight: bold;
+        letter-spacing: 5px;
+        color: #ddd;
+    }
+
+    .subtitle {
+        margin-top: 7px;
+        font-size: 13px;
+        letter-spacing: 3px;
+        color: #777;
+    }
+
+    .status-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border: 1px solid #555;
+        padding: 12px 16px;
+        margin-bottom: 20px;
+        background: #080808;
+    }
+
+    .online {
+        color: #aaa;
+        font-weight: bold;
+    }
+
+    .online::before {
+        content: "● ";
+        color: #ddd;
+    }
+
+    .updated {
+        color: #666;
+        font-size: 12px;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+    }
+
+    .panel {
+        border: 1px solid #555;
+        background: #050505;
+        padding: 18px;
+        min-height: 180px;
+    }
+
+    .panel-title {
+        font-size: 16px;
+        font-weight: bold;
+        letter-spacing: 3px;
+        color: #ddd;
+        border-bottom: 1px solid #444;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+    }
+
+    .stat-row {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px dotted #333;
+        padding: 8px 0;
+    }
+
+    .stat-label {
+        color: #777;
+    }
+
+    .stat-value {
+        color: #ddd;
+        font-weight: bold;
+    }
+
+    .news-item {
+        border-bottom: 1px dotted #333;
+        padding: 10px 0;
+    }
+
+    .news-title {
+        color: #ddd;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .news-date {
+        color: #666;
+        font-size: 11px;
+        margin-bottom: 6px;
+    }
+
+    .news-message {
+        color: #999;
+        line-height: 1.5;
+        font-size: 13px;
+    }
+
+    .player,
+    .match {
+        border-bottom: 1px dotted #333;
+        padding: 10px 0;
+    }
+
+    .player-name,
+    .match-game {
+        color: #ddd;
+        font-weight: bold;
+    }
+
+    .player-info,
+    .match-info {
+        color: #777;
+        font-size: 12px;
+        margin-top: 4px;
+    }
+
+    .footer {
+        margin-top: 20px;
+        border-top: 1px solid #333;
+        padding-top: 15px;
+        color: #555;
+        font-size: 11px;
+        letter-spacing: 1px;
+        text-align: center;
+    }
+
+    .error {
+        color: #888;
+        font-size: 12px;
+    }
+
+    @media (max-width: 700px) {
+        .grid {
+            grid-template-columns: 1fr;
+        }
+
+        .screen {
+            padding: 15px;
+        }
+
+        .status-bar {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
+        }
+    }
+</style>
+
 </head>
 
 <body>
 
-  <!-- CRT scanline effect -->
-  <div class="scanlines"></div>
+<div class="screen">
 
-  <!-- ========================= -->
-  <!-- HEADER                     -->
-  <!-- ========================= -->
+```
+<div class="header">
+    <div class="logo">XBAND-RA</div>
+    <div class="subtitle">RETROARCH NETWORK TERMINAL</div>
+</div>
 
-  <header>
-
-    <div class="xband-logo">
-      X<span>BAND</span>
-    </div>
-
-    <div class="network-status">
-
-      <span id="status-led" class="led"></span>
-
-      <span id="network-status">
+<div class="status-bar">
+    <div id="networkStatus" class="online">
         CONNECTING...
-      </span>
-
     </div>
 
-    <div class="retroarch">
-      RETROARCH
+    <div id="lastUpdate" class="updated">
+        CONTACTING NETWORK...
+    </div>
+</div>
+
+<div class="grid">
+
+    <div class="panel">
+        <div class="panel-title">NETWORK STATUS</div>
+
+        <div class="stat-row">
+            <span class="stat-label">NETWORK</span>
+            <span id="networkName" class="stat-value">---</span>
+        </div>
+
+        <div class="stat-row">
+            <span class="stat-label">SERVER</span>
+            <span id="serverName" class="stat-value">---</span>
+        </div>
+
+        <div class="stat-row">
+            <span class="stat-label">PLAYERS ONLINE</span>
+            <span id="playersOnline" class="stat-value">---</span>
+        </div>
+
+        <div class="stat-row">
+            <span class="stat-label">ACTIVE MATCHES</span>
+            <span id="activeMatches" class="stat-value">---</span>
+        </div>
+
+        <div class="stat-row">
+            <span class="stat-label">OPEN MATCHES</span>
+            <span id="openMatches" class="stat-value">---</span>
+        </div>
+
+        <div class="stat-row">
+            <span class="stat-label">TOURNAMENTS</span>
+            <span id="tournaments" class="stat-value">---</span>
+        </div>
     </div>
 
-  </header>
-
-
-  <!-- ========================= -->
-  <!-- MAIN NAVIGATION            -->
-  <!-- ========================= -->
-
-  <nav>
-
-    <a href="#home">
-      HOME
-    </a>
-
-    <a href="#news">
-      NEWS
-    </a>
-
-    <a href="#players">
-      PLAYERS
-    </a>
-
-    <a href="#tournaments">
-      TOURNAMENTS
-    </a>
-
-    <a href="#status">
-      NETWORK STATUS
-    </a>
-
-  </nav>
-
-
-  <!-- ========================= -->
-  <!-- MAIN CONTENT               -->
-  <!-- ========================= -->
-
-  <main>
-
-
-    <!-- ========================= -->
-    <!-- HOME                       -->
-    <!-- ========================= -->
-
-    <section id="home">
-
-      <div class="panel">
-
-        <div class="panel-title">
-          XBAND NETWORK
+    <div class="panel">
+        <div class="panel-title">NETWORK NEWS</div>
+        <div id="news">
+            <div class="error">RECEIVING NEWS...</div>
         </div>
+    </div>
 
-        <div class="welcome">
-
-          <h1>
-            WELCOME TO XBAND
-          </h1>
-
-          <p>
-            RETROARCH ONLINE GAMING NETWORK
-          </p>
-
-          <p class="small">
-            CONNECT. COMPETE. PLAY.
-          </p>
-
+    <div class="panel">
+        <div class="panel-title">PLAYERS ONLINE</div>
+        <div id="players">
+            <div class="error">SEARCHING FOR PLAYERS...</div>
         </div>
+    </div>
 
-      </div>
-
-    </section>
-
-
-
-    <!-- ========================= -->
-    <!-- NETWORK INFORMATION        -->
-    <!-- ========================= -->
-
-    <section>
-
-      <div class="status-grid">
-
-
-        <!-- STATUS -->
-
-        <div class="panel status-panel">
-
-          <div class="panel-title">
-            NETWORK
-          </div>
-
-          <div
-            id="network-status-box"
-            class="status-online"
-          >
-            ● ONLINE
-          </div>
-
-          <p>
-            SERVER:
-            <span id="server-name">
-              XBAND-RA
-            </span>
-          </p>
-
+    <div class="panel">
+        <div class="panel-title">MATCH CENTER</div>
+        <div id="matches">
+            <div class="error">SEARCHING FOR MATCHES...</div>
         </div>
+    </div>
 
+</div>
 
-        <!-- PLAYERS -->
+<div class="footer">
+    XBAND-RA NETWORK SERVICE • RETROARCH • CONNECTION ESTABLISHED
+</div>
+```
 
-        <div class="panel status-panel">
+</div>
 
-          <div class="panel-title">
-            PLAYERS ONLINE
-          </div>
+<script>
 
-          <div
-            id="players-online"
-            class="big-number"
-          >
-            ---
-          </div>
+const BASE_URL = "./";
 
-          <p>
-            CURRENTLY CONNECTED
-          </p>
+async function getJSON(file) {
+    const response = await fetch(BASE_URL + file + "?t=" + Date.now());
 
-        </div>
+    if (!response.ok) {
+        throw new Error("Unable to retrieve " + file);
+    }
 
+    return response.json();
+}
 
-        <!-- SERVER VERSION -->
 
-        <div class="panel status-panel">
+/* NETWORK STATUS */
 
-          <div class="panel-title">
-            SERVER VERSION
-          </div>
+async function loadStatus() {
 
-          <div
-            id="server-version"
-            class="big-number small-number"
-          >
-            ---
-          </div>
+    try {
 
-          <p>
-            NETWORK PROTOCOL
-          </p>
+        const data = await getJSON("status.json");
 
-        </div>
+        document.getElementById("networkStatus").textContent =
+            data.online ? "NETWORK ONLINE" : "NETWORK OFFLINE";
 
+        document.getElementById("networkName").textContent =
+            data.network || "---";
 
-      </div>
+        document.getElementById("serverName").textContent =
+            data.server_name || "---";
 
-    </section>
+        document.getElementById("playersOnline").textContent =
+            data.players_online ?? "0";
 
+        document.getElementById("activeMatches").textContent =
+            data.active_matches ?? "0";
 
+        document.getElementById("openMatches").textContent =
+            data.open_matches ?? "0";
 
-    <!-- ========================= -->
-    <!-- SERVER MESSAGE             -->
-    <!-- ========================= -->
+        document.getElementById("tournaments").textContent =
+            data.tournaments ?? "0";
 
-    <section>
+        document.getElementById("lastUpdate").textContent =
+            "SERVER UPDATE: " + (data.last_update || "UNKNOWN");
 
-      <div class="panel">
+    } catch (error) {
 
-        <div class="panel-title">
-          NETWORK MESSAGE
-        </div>
+        document.getElementById("networkStatus").textContent =
+            "NETWORK ERROR";
 
-        <div
-          id="server-message"
-          class="server-message"
-        >
-          CONNECTING TO XBAND NETWORK...
-        </div>
+        document.getElementById("lastUpdate").textContent =
+            "SERVER UNAVAILABLE";
 
-      </div>
+        console.error(error);
+    }
+}
 
-    </section>
 
+/* NEWS */
 
+async function loadNews() {
 
-    <!-- ========================= -->
-    <!-- NEWS                       -->
-    <!-- ========================= -->
+    const container = document.getElementById("news");
 
-    <section id="news">
+    try {
 
-      <div class="panel">
+        const data = await getJSON("news.json");
 
-        <div class="panel-title">
-          LATEST NETWORK NEWS
-        </div>
+        container.innerHTML = "";
 
-        <div id="news-list">
+        data.news.forEach(item => {
 
-          CONNECTING TO NEWS SERVER...
+            const element = document.createElement("div");
 
-        </div>
+            element.className = "news-item";
 
-      </div>
+            element.innerHTML = `
+                <div class="news-title">${item.title}</div>
+                <div class="news-date">${item.date}</div>
+                <div class="news-message">${item.message}</div>
+            `;
 
-    </section>
-
-
-
-    <!-- ========================= -->
-    <!-- TOURNAMENT                -->
-    <!-- ========================= -->
-
-    <section id="tournaments">
-
-      <div class="panel">
-
-        <div class="panel-title">
-          UPCOMING TOURNAMENT
-        </div>
-
-        <p>
-          <strong>
-            STREET FIGHTER II TURBO
-          </strong>
-        </p>
-
-        <p>
-          32 PLAYER OPEN TOURNAMENT
-        </p>
-
-        <p>
-          REGISTRATION:
-          <span class="status-online">
-            OPEN
-          </span>
-        </p>
-
-      </div>
-
-    </section>
-
-
-
-    <!-- ========================= -->
-    <!-- NETWORK STATUS             -->
-    <!-- ========================= -->
-
-    <section id="status">
-
-      <div class="panel">
-
-        <div class="panel-title">
-          NETWORK STATUS
-        </div>
-
-        <p>
-          NETWORK:
-          <span
-            id="network-status-large"
-            class="status-online"
-          >
-            ONLINE
-          </span>
-        </p>
-
-        <p>
-          NEWS SERVER:
-          <span class="status-online">
-            ONLINE
-          </span>
-        </p>
-
-        <p>
-          API STATUS:
-          <span class="status-online">
-            ONLINE
-          </span>
-        </p>
-
-        <p>
-          LAST UPDATE:
-          <span id="last-update">
-            ---
-          </span>
-        </p>
-
-      </div>
-
-    </section>
-
-
-  </main>
-
-
-  <!-- ========================= -->
-  <!-- FOOTER                    -->
-  <!-- ========================= -->
-
-  <footer>
-
-    XBAND-RA NETWORK //
-    RETROARCH ONLINE SERVICE
-
-  </footer>
-
-
-
-  <!-- ========================= -->
-  <!-- NETWORK SCRIPT             -->
-  <!-- ========================= -->
-
-  <script>
-
-    /*
-     * XBAND-RA NETWORK CLIENT
-     *
-     * This retrieves the network information
-     * from news.json.
-     *
-     * Later, RetroArch will use the same
-     * information directly.
-     */
-
-
-    const NEWS_URL =
-      "news.json";
-
-
-    /*
-     * Retrieve network information
-     */
-
-    function updateNetwork()
-    {
-
-      /*
-       * Cache busting ensures that we don't
-       * accidentally display an old GitHub
-       * Pages response.
-       */
-
-      const url =
-        NEWS_URL +
-        "?timestamp=" +
-        Date.now();
-
-
-      fetch(url)
-
-        .then(function(response)
-        {
-
-          if (!response.ok)
-          {
-            throw new Error(
-              "NETWORK ERROR"
-            );
-          }
-
-          return response.json();
-
-        })
-
-
-        .then(function(data)
-        {
-
-          /*
-           * ==========================
-           * BASIC NETWORK INFORMATION
-           * ==========================
-           */
-
-
-          document.getElementById(
-            "server-name"
-          ).textContent =
-            data.network;
-
-
-          document.getElementById(
-            "server-version"
-          ).textContent =
-            data.version;
-
-
-          document.getElementById(
-            "players-online"
-          ).textContent =
-            Number(
-              data.players_online
-            ).toLocaleString();
-
-
-          document.getElementById(
-            "server-message"
-          ).textContent =
-            data.server_message;
-
-
-          document.getElementById(
-            "last-update"
-          ).textContent =
-            data.last_update;
-
-
-
-          /*
-           * ==========================
-           * NETWORK STATUS
-           * ==========================
-           */
-
-
-          const status =
-            data.status.toUpperCase();
-
-
-          document.getElementById(
-            "network-status"
-          ).textContent =
-            status;
-
-
-          document.getElementById(
-            "network-status-large"
-          ).textContent =
-            status;
-
-
-          document.getElementById(
-            "network-status-box"
-          ).textContent =
-            status === "ONLINE"
-              ? "● ONLINE"
-              : "● " + status;
-
-
-
-          /*
-           * ==========================
-           * NEWS
-           * ==========================
-           */
-
-
-          const newsList =
-            document.getElementById(
-              "news-list"
-            );
-
-
-          newsList.innerHTML = "";
-
-
-          /*
-           * Make sure the news array exists.
-           */
-
-          if (
-            !data.news ||
-            !Array.isArray(data.news)
-          )
-          {
-
-            newsList.textContent =
-              "NO NEWS AVAILABLE";
-
-            return;
-
-          }
-
-
-          /*
-           * Display every news item.
-           */
-
-          data.news.forEach(
-            function(item)
-            {
-
-              const article =
-                document.createElement(
-                  "article"
-                );
-
-
-              article.innerHTML = `
-
-                <div class="news-date">
-
-                  ${item.date}
-                  ${item.time || ""}
-
-                </div>
-
-
-                <h2>
-
-                  ${item.title}
-
-                </h2>
-
-
-                <p>
-
-                  ${item.message}
-
-                </p>
-
-              `;
-
-
-              newsList.appendChild(
-                article
-              );
-
-            }
-          );
-
-        })
-
-
-        /*
-         * ==========================
-         * CONNECTION ERROR
-         * ==========================
-         */
-
-        .catch(function(error)
-        {
-
-          console.error(
-            "XBAND NETWORK ERROR:",
-            error
-          );
-
-
-          document.getElementById(
-            "network-status"
-          ).textContent =
-            "OFFLINE";
-
-
-          document.getElementById(
-            "network-status-large"
-          ).textContent =
-            "OFFLINE";
-
-
-          document.getElementById(
-            "network-status-box"
-          ).textContent =
-            "● OFFLINE";
-
-
-          document.getElementById(
-            "server-message"
-          ).textContent =
-            "UNABLE TO CONTACT XBAND NETWORK";
-
-
-          document.getElementById(
-            "news-list"
-          ).textContent =
-            "NETWORK CONNECTION ERROR";
+            container.appendChild(element);
 
         });
 
+    } catch (error) {
+
+        container.innerHTML =
+            '<div class="error">NEWS SERVER UNAVAILABLE</div>';
+
+        console.error(error);
     }
+}
 
 
+/* PLAYERS */
 
-    /*
-     * Run immediately when the page loads.
-     */
+async function loadPlayers() {
 
-    updateNetwork();
+    const container = document.getElementById("players");
+
+    try {
+
+        const data = await getJSON("players.json");
+
+        container.innerHTML = "";
+
+        if (!data.players || data.players.length === 0) {
+
+            container.innerHTML =
+                '<div class="error">NO PLAYERS ONLINE</div>';
+
+            return;
+        }
+
+        data.players.forEach(player => {
+
+            const element = document.createElement("div");
+
+            element.className = "player";
+
+            element.innerHTML = `
+                <div class="player-name">
+                    ${player.name}
+                </div>
+
+                <div class="player-info">
+                    ${player.status.toUpperCase()}
+                    • ${player.game}
+                    • ${player.country}
+                </div>
+            `;
+
+            container.appendChild(element);
+
+        });
+
+    } catch (error) {
+
+        container.innerHTML =
+            '<div class="error">PLAYER SERVER UNAVAILABLE</div>';
+
+        console.error(error);
+    }
+}
 
 
+/* MATCHES */
 
-    /*
-     * Check for updated information
-     * every 60 seconds.
-     *
-     * Later we can make this configurable.
-     */
+async function loadMatches() {
 
-    setInterval(
-      updateNetwork,
-      60000
-    );
+    const container = document.getElementById("matches");
 
-  </script>
+    try {
+
+        const data = await getJSON("matches.json");
+
+        container.innerHTML = "";
+
+        if (!data.matches || data.matches.length === 0) {
+
+            container.innerHTML =
+                '<div class="error">NO MATCHES AVAILABLE</div>';
+
+            return;
+        }
+
+        data.matches.forEach(match => {
+
+            const element = document.createElement("div");
+
+            element.className = "match";
+
+            element.innerHTML = `
+                <div class="match-game">
+                    ${match.game}
+                </div>
+
+                <div class="match-info">
+                    ${match.status.toUpperCase()}
+                    • HOST: ${match.host}
+                    • ${match.players}/${match.max_players} PLAYERS
+                </div>
+            `;
+
+            container.appendChild(element);
+
+        });
+
+    } catch (error) {
+
+        container.innerHTML =
+            '<div class="error">MATCH SERVER UNAVAILABLE</div>';
+
+        console.error(error);
+    }
+}
+
+
+/* INITIAL LOAD */
+
+async function updateNetwork() {
+
+    await Promise.all([
+        loadStatus(),
+        loadNews(),
+        loadPlayers(),
+        loadMatches()
+    ]);
+
+}
+
+
+/* UPDATE EVERY 30 SECONDS */
+
+updateNetwork();
+
+setInterval(updateNetwork, 30000);
+
+</script>
 
 </body>
 </html>
