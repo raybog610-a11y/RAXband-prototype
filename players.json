@@ -2,11 +2,16 @@
   "network": "XBAND-RA",
   "players": [
     {
-      "id": "PLAYER001",
-      "name": "XBAND_USER",
-      "status": "online",
-      "game": "RetroArch",
-      "country": "ZA"
+      "id": 1,
+      "name": "NUL",
+      "status": "ONLINE",
+      "game": "Street Fighter II"
+    },
+    {
+      "id": 2,
+      "name": "PLAYER2",
+      "status": "ONLINE",
+      "game": "Mortal Kombat"
     }
   ]
 }
