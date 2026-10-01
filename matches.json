@@ -1,0 +1,13 @@
+{
+  "network": "XBAND-RA",
+  "matches": [
+    {
+      "id": "MATCH001",
+      "status": "open",
+      "game": "Street Fighter II",
+      "host": "XBAND_USER",
+      "players": 1,
+      "max_players": 2
+    }
+  ]
+}
