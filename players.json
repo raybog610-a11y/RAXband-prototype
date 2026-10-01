@@ -12,6 +12,12 @@
       "name": "PLAYER2",
       "status": "ONLINE",
       "game": "Mortal Kombat"
+    },
+    {
+      "id": 3,
+      "name": "PLAYER3",
+      "status": "AWAY",
+      "game": "Sonic 3"
     }
   ]
 }
