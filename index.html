@@ -2,97 +2,643 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>XBAND Network</title>
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="XBAND-RA RetroArch Online Gaming Network"
+  >
+
+  <title>XBAND-RA Network</title>
+
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
+  <!-- CRT scanline effect -->
   <div class="scanlines"></div>
 
+  <!-- ========================= -->
+  <!-- HEADER                     -->
+  <!-- ========================= -->
+
   <header>
-    <div class="xband-logo">X<span>BAND</span></div>
-    <div class="network-status">
-      <span class="led"></span>
-      ONLINE GAMING NETWORK
+
+    <div class="xband-logo">
+      X<span>BAND</span>
     </div>
-    <div class="retroarch">RETROARCH</div>
+
+    <div class="network-status">
+
+      <span id="status-led" class="led"></span>
+
+      <span id="network-status">
+        CONNECTING...
+      </span>
+
+    </div>
+
+    <div class="retroarch">
+      RETROARCH
+    </div>
+
   </header>
 
+
+  <!-- ========================= -->
+  <!-- MAIN NAVIGATION            -->
+  <!-- ========================= -->
+
   <nav>
-    <a href="#home">HOME</a>
-    <a href="#news">NEWS</a>
-    <a href="#players">PLAYERS</a>
-    <a href="#tournaments">TOURNAMENTS</a>
-    <a href="#status">NETWORK STATUS</a>
+
+    <a href="#home">
+      HOME
+    </a>
+
+    <a href="#news">
+      NEWS
+    </a>
+
+    <a href="#players">
+      PLAYERS
+    </a>
+
+    <a href="#tournaments">
+      TOURNAMENTS
+    </a>
+
+    <a href="#status">
+      NETWORK STATUS
+    </a>
+
   </nav>
 
+
+  <!-- ========================= -->
+  <!-- MAIN CONTENT               -->
+  <!-- ========================= -->
+
   <main>
-    <section class="hero" id="home">
+
+
+    <!-- ========================= -->
+    <!-- HOME                       -->
+    <!-- ========================= -->
+
+    <section id="home">
+
       <div class="panel">
-        <div class="panel-title">WELCOME TO XBAND</div>
-        <p>RETROARCH ONLINE GAMING NETWORK</p>
-        <p class="small">THIS SERVER PROVIDES NEWS AND NETWORK INFORMATION TO XBAND-ENABLED RETROARCH CLIENTS.</p>
+
+        <div class="panel-title">
+          XBAND NETWORK
+        </div>
+
+        <div class="welcome">
+
+          <h1>
+            WELCOME TO XBAND
+          </h1>
+
+          <p>
+            RETROARCH ONLINE GAMING NETWORK
+          </p>
+
+          <p class="small">
+            CONNECT. COMPETE. PLAY.
+          </p>
+
+        </div>
+
       </div>
+
     </section>
+
+
+
+    <!-- ========================= -->
+    <!-- NETWORK INFORMATION        -->
+    <!-- ========================= -->
+
+    <section>
+
+      <div class="status-grid">
+
+
+        <!-- STATUS -->
+
+        <div class="panel status-panel">
+
+          <div class="panel-title">
+            NETWORK
+          </div>
+
+          <div
+            id="network-status-box"
+            class="status-online"
+          >
+            ● ONLINE
+          </div>
+
+          <p>
+            SERVER:
+            <span id="server-name">
+              XBAND-RA
+            </span>
+          </p>
+
+        </div>
+
+
+        <!-- PLAYERS -->
+
+        <div class="panel status-panel">
+
+          <div class="panel-title">
+            PLAYERS ONLINE
+          </div>
+
+          <div
+            id="players-online"
+            class="big-number"
+          >
+            ---
+          </div>
+
+          <p>
+            CURRENTLY CONNECTED
+          </p>
+
+        </div>
+
+
+        <!-- SERVER VERSION -->
+
+        <div class="panel status-panel">
+
+          <div class="panel-title">
+            SERVER VERSION
+          </div>
+
+          <div
+            id="server-version"
+            class="big-number small-number"
+          >
+            ---
+          </div>
+
+          <p>
+            NETWORK PROTOCOL
+          </p>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ========================= -->
+    <!-- SERVER MESSAGE             -->
+    <!-- ========================= -->
+
+    <section>
+
+      <div class="panel">
+
+        <div class="panel-title">
+          NETWORK MESSAGE
+        </div>
+
+        <div
+          id="server-message"
+          class="server-message"
+        >
+          CONNECTING TO XBAND NETWORK...
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ========================= -->
+    <!-- NEWS                       -->
+    <!-- ========================= -->
 
     <section id="news">
+
       <div class="panel">
-        <div class="panel-title">LATEST NETWORK NEWS</div>
-        <div id="news-list">LOADING...</div>
+
+        <div class="panel-title">
+          LATEST NETWORK NEWS
+        </div>
+
+        <div id="news-list">
+
+          CONNECTING TO NEWS SERVER...
+
+        </div>
+
       </div>
+
     </section>
 
-    <section id="players">
-      <div class="panel">
-        <div class="panel-title">PLAYERS ONLINE</div>
-        <div class="big-number">1,247</div>
-        <p>PLAYERS CURRENTLY CONNECTED</p>
-      </div>
-    </section>
+
+
+    <!-- ========================= -->
+    <!-- TOURNAMENT                -->
+    <!-- ========================= -->
 
     <section id="tournaments">
+
       <div class="panel">
-        <div class="panel-title">UPCOMING TOURNAMENT</div>
-        <p><strong>STREET FIGHTER II TURBO</strong></p>
-        <p>32 PLAYER OPEN TOURNAMENT</p>
-        <p>REGISTRATION: OPEN</p>
+
+        <div class="panel-title">
+          UPCOMING TOURNAMENT
+        </div>
+
+        <p>
+          <strong>
+            STREET FIGHTER II TURBO
+          </strong>
+        </p>
+
+        <p>
+          32 PLAYER OPEN TOURNAMENT
+        </p>
+
+        <p>
+          REGISTRATION:
+          <span class="status-online">
+            OPEN
+          </span>
+        </p>
+
       </div>
+
     </section>
+
+
+
+    <!-- ========================= -->
+    <!-- NETWORK STATUS             -->
+    <!-- ========================= -->
 
     <section id="status">
+
       <div class="panel">
-        <div class="panel-title">NETWORK STATUS</div>
-        <p><span class="status-online">● ONLINE</span></p>
-        <p>NEWS SERVER: ONLINE</p>
-        <p>API STATUS: ONLINE</p>
+
+        <div class="panel-title">
+          NETWORK STATUS
+        </div>
+
+        <p>
+          NETWORK:
+          <span
+            id="network-status-large"
+            class="status-online"
+          >
+            ONLINE
+          </span>
+        </p>
+
+        <p>
+          NEWS SERVER:
+          <span class="status-online">
+            ONLINE
+          </span>
+        </p>
+
+        <p>
+          API STATUS:
+          <span class="status-online">
+            ONLINE
+          </span>
+        </p>
+
+        <p>
+          LAST UPDATE:
+          <span id="last-update">
+            ---
+          </span>
+        </p>
+
       </div>
+
     </section>
+
+
   </main>
 
+
+  <!-- ========================= -->
+  <!-- FOOTER                    -->
+  <!-- ========================= -->
+
   <footer>
-    XBAND-RA NETWORK // RETROARCH ONLINE SERVICE
+
+    XBAND-RA NETWORK //
+    RETROARCH ONLINE SERVICE
+
   </footer>
 
-  <script>
-    fetch("news.json?cache=" + Date.now())
-      .then(response => response.json())
-      .then(data => {
-        const list = document.getElementById("news-list");
-        list.innerHTML = "";
 
-        data.news.forEach(item => {
-          const article = document.createElement("article");
-          article.innerHTML = `
-            <div class="news-date">${item.date}</div>
-            <h2>${item.title}</h2>
-            <p>${item.message}</p>
-          `;
-          list.appendChild(article);
+
+  <!-- ========================= -->
+  <!-- NETWORK SCRIPT             -->
+  <!-- ========================= -->
+
+  <script>
+
+    /*
+     * XBAND-RA NETWORK CLIENT
+     *
+     * This retrieves the network information
+     * from news.json.
+     *
+     * Later, RetroArch will use the same
+     * information directly.
+     */
+
+
+    const NEWS_URL =
+      "news.json";
+
+
+    /*
+     * Retrieve network information
+     */
+
+    function updateNetwork()
+    {
+
+      /*
+       * Cache busting ensures that we don't
+       * accidentally display an old GitHub
+       * Pages response.
+       */
+
+      const url =
+        NEWS_URL +
+        "?timestamp=" +
+        Date.now();
+
+
+      fetch(url)
+
+        .then(function(response)
+        {
+
+          if (!response.ok)
+          {
+            throw new Error(
+              "NETWORK ERROR"
+            );
+          }
+
+          return response.json();
+
+        })
+
+
+        .then(function(data)
+        {
+
+          /*
+           * ==========================
+           * BASIC NETWORK INFORMATION
+           * ==========================
+           */
+
+
+          document.getElementById(
+            "server-name"
+          ).textContent =
+            data.network;
+
+
+          document.getElementById(
+            "server-version"
+          ).textContent =
+            data.version;
+
+
+          document.getElementById(
+            "players-online"
+          ).textContent =
+            Number(
+              data.players_online
+            ).toLocaleString();
+
+
+          document.getElementById(
+            "server-message"
+          ).textContent =
+            data.server_message;
+
+
+          document.getElementById(
+            "last-update"
+          ).textContent =
+            data.last_update;
+
+
+
+          /*
+           * ==========================
+           * NETWORK STATUS
+           * ==========================
+           */
+
+
+          const status =
+            data.status.toUpperCase();
+
+
+          document.getElementById(
+            "network-status"
+          ).textContent =
+            status;
+
+
+          document.getElementById(
+            "network-status-large"
+          ).textContent =
+            status;
+
+
+          document.getElementById(
+            "network-status-box"
+          ).textContent =
+            status === "ONLINE"
+              ? "● ONLINE"
+              : "● " + status;
+
+
+
+          /*
+           * ==========================
+           * NEWS
+           * ==========================
+           */
+
+
+          const newsList =
+            document.getElementById(
+              "news-list"
+            );
+
+
+          newsList.innerHTML = "";
+
+
+          /*
+           * Make sure the news array exists.
+           */
+
+          if (
+            !data.news ||
+            !Array.isArray(data.news)
+          )
+          {
+
+            newsList.textContent =
+              "NO NEWS AVAILABLE";
+
+            return;
+
+          }
+
+
+          /*
+           * Display every news item.
+           */
+
+          data.news.forEach(
+            function(item)
+            {
+
+              const article =
+                document.createElement(
+                  "article"
+                );
+
+
+              article.innerHTML = `
+
+                <div class="news-date">
+
+                  ${item.date}
+                  ${item.time || ""}
+
+                </div>
+
+
+                <h2>
+
+                  ${item.title}
+
+                </h2>
+
+
+                <p>
+
+                  ${item.message}
+
+                </p>
+
+              `;
+
+
+              newsList.appendChild(
+                article
+              );
+
+            }
+          );
+
+        })
+
+
+        /*
+         * ==========================
+         * CONNECTION ERROR
+         * ==========================
+         */
+
+        .catch(function(error)
+        {
+
+          console.error(
+            "XBAND NETWORK ERROR:",
+            error
+          );
+
+
+          document.getElementById(
+            "network-status"
+          ).textContent =
+            "OFFLINE";
+
+
+          document.getElementById(
+            "network-status-large"
+          ).textContent =
+            "OFFLINE";
+
+
+          document.getElementById(
+            "network-status-box"
+          ).textContent =
+            "● OFFLINE";
+
+
+          document.getElementById(
+            "server-message"
+          ).textContent =
+            "UNABLE TO CONTACT XBAND NETWORK";
+
+
+          document.getElementById(
+            "news-list"
+          ).textContent =
+            "NETWORK CONNECTION ERROR";
+
         });
-      })
-      .catch(() => {
-        document.getElementById("news-list").textContent = "NETWORK ERROR";
-      });
+
+    }
+
+
+
+    /*
+     * Run immediately when the page loads.
+     */
+
+    updateNetwork();
+
+
+
+    /*
+     * Check for updated information
+     * every 60 seconds.
+     *
+     * Later we can make this configurable.
+     */
+
+    setInterval(
+      updateNetwork,
+      60000
+    );
+
   </script>
+
 </body>
 </html>
