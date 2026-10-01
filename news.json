@@ -1,18 +1,31 @@
 {
   "network": "XBAND-RA",
   "version": 1,
+  "status": "ONLINE",
+  "players_online": 1247,
+  "server_message": "XBAND-RA NETWORK OPERATIONAL",
+  "last_update": "2026-10-01 09:30",
   "news": [
     {
       "id": 1,
       "date": "2026-10-01",
+      "time": "09:30",
       "title": "WELCOME TO XBAND",
-      "message": "The XBAND-RA network is online. This message is being served from the network news server."
+      "message": "The XBAND-RA network is online. Welcome to the next generation of retro gaming."
     },
     {
       "id": 2,
       "date": "2026-10-01",
-      "title": "XBAND SERVICE TEST!",
-      "message": "If you're reading this step 1 is complete."
+      "time": "09:25",
+      "title": "RETROARCH SERVICE TEST",
+      "message": "The XBAND-RA network news service is operational. Remote messages can now be delivered to connected clients."
+    },
+    {
+      "id": 3,
+      "date": "2026-10-01",
+      "time": "09:20",
+      "title": "NETWORK EXPANSION",
+      "message": "Additional XBAND network services are currently being developed."
     }
   ]
 }
