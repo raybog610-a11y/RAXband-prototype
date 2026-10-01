@@ -2,12 +2,20 @@
   "network": "XBAND-RA",
   "matches": [
     {
-      "id": "MATCH001",
-      "status": "open",
+      "id": 1,
+      "player1": "NUL",
+      "player2": "PLAYER2",
       "game": "Street Fighter II",
-      "host": "XBAND_USER",
-      "players": 1,
-      "max_players": 2
+      "status": "IN PROGRESS",
+      "score": "2-1"
+    },
+    {
+      "id": 2,
+      "player1": "PLAYER3",
+      "player2": "PLAYER4",
+      "game": "Mortal Kombat",
+      "status": "WAITING",
+      "score": "0-0"
     }
   ]
 }
